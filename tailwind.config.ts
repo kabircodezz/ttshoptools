@@ -1,67 +1,57 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
-  darkMode: ["class"],
-  content: ["./src/**/*.{ts,tsx}"],
+  darkMode: ['class'],
+  content: ['./src/**/*.{ts,tsx}'],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: {
+        '2xl': '1400px',
       },
+    },
+    extend: {
       colors: {
-        // Homepage (dark)
-        ink: {
-          bg: "#111111",
-          surface: "#1a1a1a",
-          border: "#2a2a2a",
-          primary: "#f5f5f0",
-          secondary: "#888888",
-          muted: "#666666",
+        brand: {
+          accent: 'rgb(var(--brand-accent) / <alpha-value>)',
+          'accent-light': 'rgb(var(--brand-accent-light) / <alpha-value>)',
+          'accent-text': 'rgb(var(--brand-accent-text) / <alpha-value>)',
+          bg: 'rgb(var(--brand-bg) / <alpha-value>)',
+          'bg-secondary': 'rgb(var(--brand-bg-secondary) / <alpha-value>)',
+          surface: 'rgb(var(--brand-surface) / <alpha-value>)',
+          border: 'rgb(var(--brand-border) / <alpha-value>)',
+          'border-strong': 'rgb(var(--brand-border-strong) / <alpha-value>)',
+          'text-primary': 'rgb(var(--brand-text-primary) / <alpha-value>)',
+          'text-secondary': 'rgb(var(--brand-text-secondary) / <alpha-value>)',
+          'text-muted': 'rgb(var(--brand-text-muted) / <alpha-value>)',
         },
-        // Funnel (light)
-        cream: {
-          bg: "#FAF9F6",
-          surface: "#ffffff",
-          border: "#e8e4dc",
-        },
-        // Accents
-        amber: {
-          DEFAULT: "#BA7517",
-          light: "#FAEEDA",
-          dark: "#854F0B",
-          border: "#EF9F27",
-          deep: "#633806",
-        },
-        coral: {
-          DEFAULT: "#D85A30",
-          light: "#FAECE7",
-          dark: "#712B13",
-        },
-        leaf: {
-          dark: "#1C3A1A",
-          DEFAULT: "#3B6D11",
-          light: "#EAF3DE",
-          border: "#97C459",
-          text: "#27500A",
-        },
+      },
+      fontFamily: {
+        sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
+      borderRadius: {
+        lg: '0.75rem',
+        xl: '1rem',
+        '2xl': '1.25rem',
       },
       keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-};
+  plugins: [require('tailwindcss-animate')],
+}
 
-export default config;
+export default config

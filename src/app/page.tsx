@@ -1,220 +1,266 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { NavDark } from "@/components/NavDark";
-import { Button } from "@/components/ui/button";
-import { SITE_URL } from "@/lib/site";
+import {
+  Activity,
+  BarChart3,
+  Layers,
+  Lock,
+  ShieldCheck,
+  Sparkles,
+  Timer,
+  Workflow,
+  Zap,
+} from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: "TTShop Tools — The TikTok Shop toolkit built on real data",
-  description:
-    "Two tools purpose-built for serious TikTok Shop sellers. Connected directly to TikTok's official Partner API — not scraped, not guessed.",
-  alternates: { canonical: `${SITE_URL}/` },
-  openGraph: {
-    title: "TTShop Tools — The TikTok Shop toolkit built on real data",
+import { Nav } from '@/components/sections/Nav'
+import { Hero } from '@/components/sections/Hero'
+import { StatsBar } from '@/components/sections/StatsBar'
+import { FeatureGrid } from '@/components/sections/FeatureGrid'
+import { ComparisonTable } from '@/components/sections/ComparisonTable'
+import { Calculator } from '@/components/sections/Calculator'
+import { EmailCapture } from '@/components/sections/EmailCapture'
+import { CTABlock } from '@/components/sections/CTABlock'
+import { FAQ } from '@/components/sections/FAQ'
+import { Footer } from '@/components/sections/Footer'
+
+const navLinks = [
+  { label: 'Features', href: '#features' },
+  { label: 'Compare', href: '#compare' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'FAQ', href: '#faq' },
+]
+
+const heroStats = [
+  { value: '12k+', label: 'Active teams' },
+  { value: '99.99%', label: 'Uptime SLA' },
+  { value: '4.9/5', label: 'Avg. rating' },
+]
+
+const barStats = [
+  { value: '$48M', label: 'Tracked monthly' },
+  { value: '180+', label: 'Integrations' },
+  { value: '45 sec', label: 'Avg. setup time' },
+  { value: '24/7', label: 'Live support' },
+]
+
+const features = [
+  {
+    title: 'Built on a strict design system',
     description:
-      "Two tools purpose-built for serious TikTok Shop sellers. Built on TikTok's official Partner API.",
-    url: `${SITE_URL}/`,
-    type: "website",
+      'Every component reads colors and spacing from a single source. Swap the brand file and the entire site re-skins in seconds.',
+    icon: <Layers className="h-5 w-5" />,
   },
-};
+  {
+    title: 'Production-grade primitives',
+    description:
+      'Sections, typography, and shadcn/ui shells composed with conviction. No throwaway markup, no surprise breakpoints.',
+    icon: <Workflow className="h-5 w-5" />,
+  },
+  {
+    title: 'Responsive at every breakpoint',
+    description:
+      'Verified at 375, 768, and 1280 pixels. Mobile-first decisions baked into hero, stats, and pricing surfaces.',
+    icon: <Sparkles className="h-5 w-5" />,
+  },
+  {
+    title: 'Strict TypeScript & lint',
+    description:
+      'Strict mode on, zero any-types in shells, predictable prop contracts so a junior dev can ship safely.',
+    icon: <ShieldCheck className="h-5 w-5" />,
+  },
+]
+
+const competitors = ['Generic boilerplate', 'Random theme', 'In-house build']
+
+const comparisonRows = [
+  { label: 'Section spacing system', values: [true, false, false, false] },
+  { label: 'Single-source brand file', values: [true, false, false, true] },
+  { label: 'shadcn/ui out of the box', values: [true, true, false, false] },
+  { label: 'TypeScript strict mode', values: [true, false, false, true] },
+  { label: 'Marketing-tuned components', values: [true, false, true, false] },
+  { label: 'Re-skin in under 10 min', values: ['Yes', 'No', 'Maybe', 'No'] },
+]
+
+const calculatorFields = [
+  {
+    type: 'input' as const,
+    id: 'mrr',
+    label: 'Monthly recurring revenue',
+    placeholder: '25,000',
+    inputType: 'number' as const,
+    defaultValue: '25000',
+  },
+  {
+    type: 'input' as const,
+    id: 'customers',
+    label: 'Active customers',
+    placeholder: '500',
+    inputType: 'number' as const,
+    defaultValue: '500',
+  },
+  {
+    type: 'select' as const,
+    id: 'plan',
+    label: 'Plan tier',
+    placeholder: 'Choose a plan',
+    defaultValue: 'growth',
+    options: [
+      { value: 'starter', label: 'Starter' },
+      { value: 'growth', label: 'Growth' },
+      { value: 'scale', label: 'Scale' },
+    ],
+  },
+  {
+    type: 'select' as const,
+    id: 'industry',
+    label: 'Industry',
+    placeholder: 'Pick one',
+    defaultValue: 'saas',
+    options: [
+      { value: 'saas', label: 'SaaS' },
+      { value: 'ecom', label: 'E-commerce' },
+      { value: 'agency', label: 'Agency' },
+      { value: 'edu', label: 'Education' },
+    ],
+  },
+]
+
+const calculatorResults = [
+  { label: 'Monthly savings', value: '$3,420' },
+  { label: 'Hours back / wk', value: '14h' },
+  { label: 'ROI in 90 days', value: '6.2x' },
+]
+
+const faqItems = [
+  {
+    question: 'What is included in this template?',
+    answer:
+      'A pinned Next.js 15 setup, the Section + Typography foundation, ten production-grade marketing sections, shadcn primitives, and a working demo page that proves the spacing system end to end.',
+  },
+  {
+    question: 'How do I rebrand it for a new project?',
+    answer:
+      'Edit src/brand.ts. Every color, including the accent and surfaces, flows from that single file into the demo page through CSS variables — no component changes required.',
+  },
+  {
+    question: 'Can I add a database, auth, or payments?',
+    answer:
+      'Yes — those integrations are intentionally left out so each project can choose its own stack. Add them inside existing component shells without touching the spacing system.',
+  },
+  {
+    question: 'Why are Section and Typography off-limits?',
+    answer:
+      'They guarantee consistent spacing and rhythm across every page in every project. Touching them defeats the purpose of having a starter at all.',
+  },
+]
+
+const trustItems = [
+  { icon: <Lock className="h-4 w-4" />, text: 'SOC 2 Type II' },
+  { icon: <ShieldCheck className="h-4 w-4" />, text: 'GDPR ready' },
+  { icon: <Activity className="h-4 w-4" />, text: '99.99% uptime' },
+]
+
+const footerLinks = [
+  { label: 'Privacy', href: '#' },
+  { label: 'Terms', href: '#' },
+  { label: 'Contact', href: '#' },
+]
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-ink-bg text-ink-primary">
-      <NavDark />
+    <>
+      <Nav
+        siteName="Kabir Starter"
+        links={navLinks}
+        cta={{ label: 'Start free', href: '#cta' }}
+      />
 
-      {/* Hero */}
-      <section className="grid items-start gap-8 px-6 pb-10 pt-12 md:grid-cols-[1fr_auto]">
-        <div>
-          <div className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-amber-light px-3 py-1">
-            <span className="h-1.5 w-1.5 rounded-full bg-amber" />
-            <span className="text-[11px] font-medium tracking-[0.02em] text-amber-dark">
-              Official TikTok Shop Partner API
-            </span>
-          </div>
-          <h1 className="mb-4 text-[24px] font-bold leading-[1.15] tracking-[-0.02em] text-ink-primary sm:text-[28px] md:text-[32px]">
-            The TikTok Shop toolkit. Built on{" "}
-            <span className="text-amber">real data</span>, not estimates.
-          </h1>
-          <p className="mb-6 max-w-[480px] text-[14px] leading-[1.6] text-ink-secondary">
-            Two tools purpose-built for serious TikTok Shop sellers. Connected
-            directly to TikTok&apos;s official APIs — not scraped, not guessed.
-          </p>
-          <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
-            <Button
-              asChild
-              variant="default"
-              className="h-10 px-[18px] text-[13px]"
-            >
-              <Link href="/calculator">Calculate my true profit →</Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="h-10 px-[18px] text-[13px]"
-            >
-              <Link href="/affiliate">Manage my creators →</Link>
-            </Button>
-          </div>
-        </div>
+      <main>
+        <Hero
+          variant="split"
+          badge="New · v1.0"
+          title="A starter built for everything you ship next."
+          subtitle="Ten battle-tested sections, a single brand file, strict TypeScript, and zero throwaway markup. Clone, rebrand, and ship the same week."
+          ctas={[
+            { label: 'Get started', href: '#cta', variant: 'primary' },
+            { label: 'See pricing', href: '#pricing', variant: 'outline' },
+          ]}
+          stats={heroStats}
+        />
 
-        {/* Stat cards */}
-        <div className="grid grid-cols-3 gap-2 md:flex md:min-w-[140px] md:flex-col">
-          {[
-            { num: "$0", label: "scraped data", amber: true },
-            { num: "100%", label: "official API", amber: true },
-            { num: "2", label: "tools, one platform", amber: false },
-          ].map((s) => (
-            <div
-              key={s.label}
-              className="flex-1 rounded-lg border border-[0.5px] border-ink-border bg-ink-surface px-3.5 py-3"
-            >
-              <div
-                className={`text-[22px] font-bold leading-none ${
-                  s.amber ? "text-amber" : "text-ink-primary"
-                }`}
-              >
-                {s.num}
-              </div>
-              <div className="mt-1 text-[11px] text-ink-muted">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+        <StatsBar stats={barStats} />
 
-      {/* Trust banner */}
-      <section className="border-y border-[0.5px] border-[#2a2a1a] bg-[#1C160A] px-6 py-4">
-        <p className="text-[13px] leading-[1.6] text-[#ccc]">
-          Every other tool scrapes TikTok. We don&apos;t. Your numbers come
-          directly from TikTok&apos;s official Partner API —{" "}
-          <strong className="font-medium text-ink-primary">
-            the same system TikTok uses internally.
-          </strong>{" "}
-          Exact fees, real attribution, decisions based on truth.
-        </p>
-      </section>
+        <section id="features">
+          <FeatureGrid
+            variant="twoCol"
+            eyebrow="Why this template"
+            title="Designed to be cloned, not redesigned."
+            subtitle="The opinionated parts stay locked. The brandable parts flow from a single file. Spend the saved time on content, not chrome."
+            features={features}
+          />
+        </section>
 
-      {/* Comparison table */}
-      <section className="px-6 pb-8 pt-0">
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr>
-                <th className="border-b border-[0.5px] border-ink-border px-2 py-2.5 text-left text-[11px] font-normal text-ink-muted sm:px-3.5 md:text-left" />
-                {["Kalodata", "FastMoss", "PostScout"].map((h) => (
-                  <th
-                    key={h}
-                    className="border-b border-[0.5px] border-ink-border px-2 py-2.5 text-center text-[11px] font-normal text-ink-muted sm:px-3.5"
-                  >
-                    {h}
-                  </th>
-                ))}
-                <th className="border-b border-[0.5px] border-ink-border px-2 py-2.5 text-center text-[11px] font-normal text-amber sm:px-3.5">
-                  TTShop Tools
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border-b border-[0.5px] border-[#1e1e1e] px-2 py-2.5 text-left text-[11px] text-ink-muted sm:px-3.5">
-                  Data source
-                </td>
-                {[1, 2, 3].map((i) => (
-                  <td
-                    key={i}
-                    className="border-b border-[0.5px] border-[#1e1e1e] px-2 py-2.5 text-center text-[11px] text-coral sm:px-3.5 sm:text-[12px]"
-                  >
-                    Scraped
-                  </td>
-                ))}
-                <td className="border-b border-[0.5px] border-[#1e1e1e] bg-[#1C160A] px-2 py-2.5 text-center text-[11px] font-medium text-amber sm:px-3.5 sm:text-[12px]">
-                  Official API ✓
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+        <section id="compare">
+          <ComparisonTable
+            title="Why teams pick this over starter X"
+            subtitle="A starter that ships every section a marketing site actually needs — and refuses to ship the things every site deletes."
+            usLabel="Kabir Starter"
+            competitors={competitors}
+            rows={comparisonRows}
+          />
+        </section>
 
-      {/* Product cards */}
-      <section className="grid gap-4 px-6 pb-8 pt-0 md:grid-cols-2">
-        {[
-          {
-            href: "/calculator",
-            name: "FeeScope",
-            desc: "See exactly what TikTok keeps — and what you actually take home on every order.",
-            features: [
-              "Per-order true profit — not estimated",
-              "Real settlement data — what TikTok actually pays",
-              "Fee change alerts — know when rates shift",
-            ],
-            price: "$19",
-            cta: "Calculate my true profit →",
-          },
-          {
-            href: "/affiliate",
-            name: "CollabHQ",
-            desc: "Find creators, manage deals, track which affiliates actually drive orders — not estimates.",
-            features: [
-              "Pipeline management — not just a creator list",
-              "Real order attribution per creator via API",
-              "Outreach tracking — contacts, responses, deals",
-            ],
-            price: "$39",
-            cta: "Manage my creators →",
-          },
-        ].map((card) => (
-          <article
-            key={card.name}
-            className="rounded-[10px] border border-[0.5px] border-ink-border border-l-[3px] border-l-amber bg-ink-surface p-5"
-          >
-            <h3 className="mb-1.5 text-[16px] font-semibold text-ink-primary">
-              {card.name}
-            </h3>
-            <p className="mb-3.5 text-[12px] leading-[1.5] text-[#777]">
-              {card.desc}
-            </p>
-            <ul className="mb-3.5 space-y-2">
-              {card.features.map((f) => (
-                <li key={f} className="flex items-start gap-2">
-                  <span className="mt-[6px] block h-1 w-1 shrink-0 rounded-full bg-amber" />
-                  <span className="text-[12px] leading-[1.4] text-ink-secondary">
-                    {f}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-3.5 text-[20px] font-bold text-ink-primary">
-              {card.price}
-              <span className="text-[12px] font-normal text-ink-muted"> /mo</span>
-            </div>
-            <Link
-              href={card.href}
-              className="mt-3 block text-[12px] text-amber hover:underline"
-            >
-              {card.cta}
-            </Link>
-          </article>
-        ))}
-      </section>
+        <Calculator
+          title="See your projected savings"
+          subtitle="A free, instant estimate based on your team's revenue and headcount. No signup."
+          fields={calculatorFields}
+          results={calculatorResults}
+          insight={
+            <>
+              Most teams at this size recover their first year of tooling spend within{' '}
+              <strong className="font-semibold">eight weeks</strong> of switching.
+            </>
+          }
+          freeBadgeLabel="Free · No login"
+        />
 
-      {/* Footer trust bar */}
-      <footer className="border-t border-[0.5px] border-[#1e1e1e] bg-ink-bg px-6 py-4">
-        <div className="flex flex-col items-start gap-3 md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-6">
-          {[
-            "Official TikTok Shop Partner API",
-            "Built for US sellers in 2026",
-            "Founding member pricing — locked for life",
-          ].map((line) => (
-            <div key={line} className="flex items-center gap-1.5 text-[11px] text-ink-muted">
-              <span className="flex h-[14px] w-[14px] items-center justify-center rounded-full bg-leaf-dark">
-                <span className="h-1.5 w-1.5 rounded-full bg-leaf" />
-              </span>
-              {line}
-            </div>
-          ))}
-        </div>
-      </footer>
-    </main>
-  );
+        <EmailCapture
+          title="Be the first to know"
+          subtitle="Drop your email and we'll send a single line when v1.1 ships. No drip, no upsell."
+          buttonLabel="Notify me"
+          fineprint="We'll email you once. Unsubscribe with a click."
+        />
+
+        <section id="pricing">
+          <CTABlock
+            variant="dark"
+            title="Skip the boilerplate."
+            subtitle="A pinned starter, ten production sections, and a brand system you can re-skin in under ten minutes."
+            price={{ amount: '$0', original: '$199', suffix: '/mo' }}
+            checklist={[
+              'Unlimited projects, forever',
+              'TypeScript strict mode out of the box',
+              'shadcn/ui primitives wired to your brand',
+              'Mobile-first sections at every breakpoint',
+              'Free updates as the stack evolves',
+            ]}
+            cta={{ label: 'Clone the starter', href: 'https://github.com/kabircodezz/kabir-starter' }}
+            fineprint="Apache 2.0 license. Use it for client work, products, or side projects."
+          />
+        </section>
+
+        <section id="faq">
+          <FAQ
+            title="Frequently asked questions"
+            subtitle="Everything teams ask before they start cloning."
+            items={faqItems}
+          />
+        </section>
+      </main>
+
+      <Footer
+        siteName="Kabir Starter"
+        navLinks={footerLinks}
+        trustItems={trustItems}
+      />
+    </>
+  )
 }
