@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { brand } from '@/brand'
 import { brandCssVars } from '@/lib/brand-css'
+import { SITE_URL } from '@/lib/site'
 import './globals.css'
 
 const inter = Inter({
@@ -11,9 +12,19 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: brand.siteName,
-  description: 'A reusable Next.js 15 starter template for marketing sites and landing pages.',
-  metadataBase: new URL(brand.siteUrl),
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'TTShop Tools — The TikTok Shop toolkit built on real data',
+    template: '%s · TTShop Tools',
+  },
+  description:
+    "Two tools purpose-built for serious TikTok Shop sellers. Connected directly to TikTok's official Partner API — not scraped, not guessed.",
+  openGraph: {
+    type: 'website',
+    siteName: 'TTShop Tools',
+    url: SITE_URL,
+  },
+  twitter: { card: 'summary_large_image' },
 }
 
 export const viewport: Viewport = {
@@ -24,9 +35,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={inter.variable}>
       <head>
